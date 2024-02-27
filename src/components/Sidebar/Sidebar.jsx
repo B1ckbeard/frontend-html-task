@@ -24,55 +24,74 @@ export default class Sidebar extends React.Component {
 
         this.state = {
             isOpened: true,
+            title: null,
         };
     }
 
     toggleSidebar = () => {
-        this.setState((state) => ({ isOpened: !state.isOpened }) );
+        this.setState((state) => ({ isOpened: !state.isOpened }));
     };
+
+    activeLink = (title) => {
+        this.setState({ title: title });
+      };
 
     goToRoute = (path) => {
         console.log(`going to "${path}"`);
     };
 
     render() {
-        const { isOpened } = this.state;
+        const { isOpened, title } = this.state;
         const containerClassnames = classnames('sidebar', { opened: isOpened });
 
         return (
-            <div className={ containerClassnames }>
-                <div>
-                    <img
-                        src={ logo }
-                        alt="TensorFlow logo"
-                    />
-                    <span>TensorFlow</span>
-                    <button onClick={ this.toggleSidebar }>
-                        <FontAwesomeIcon icon={ isOpened ? 'angle-left' : 'angle-right' } />
-                    </button>
-                </div>
+            <div className={containerClassnames}>
+                <nav className='nav'>
+                    <div className='nav__header'>
+                        <img
+                            src={logo}
+                            alt="TensorFlow logo"
+                        />
+                        <span>TensorFlow</span>
+                        <button onClick= { this.toggleSidebar } className='nav__toggle'>
+                            <FontAwesomeIcon icon={'angle-right'}/>
+                        </button>
+                    </div>
 
-                <div>
-                    {
-                        routes.map((route) => (
-                            <div key={ route.title } onClick={ () => this.goToRoute(route.path) }>
-                                <FontAwesomeIcon icon={ route.icon } />
-                                <span>{ route.title }</span>
-                            </div>
-                        ))
-                    }
-                </div>
+                    <div className='nav__items'>
+                        {
+                            routes.map((route) => (
+                                <div key={route.title}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    this.activeLink(route.title);
+                                    this.goToRoute(route.path);
+                                }}
+                                 className={classnames('nav__items_item', {['active']: title === route.title,})}>
+                                    <FontAwesomeIcon icon={route.icon} />
+                                    <span>{route.title}</span>
+                                </div>
+                            ))
+                        }
+                    </div>
 
-                <div>
-                    {
-                        bottomRoutes.map((route) => (
-                            <div key={ route.title } onClick={ () => this.goToRoute(route.path) }>
-                                <FontAwesomeIcon icon={ route.icon } />
-                                <span>{ route.title }</span>
-                            </div>
-                        ))
-                    }
-                </div>
+                    <div className='nav__footer'>
+                        {
+                            bottomRoutes.map((route) => (
+                                <div key={route.title} 
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    this.activeLink(route.title);
+                                    this.goToRoute(route.path);
+                                }}
+                                className={classnames('nav__footer_item', {['active']: title === route.title,})}>
+                                    <FontAwesomeIcon icon={route.icon} />
+                                    <span>{route.title}</span>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </nav>
             </div>
         );
     }

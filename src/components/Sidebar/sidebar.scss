@@ -1,0 +1,168 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 64px;
+    background-color: black;
+    transition: .3s;
+    border: 1px solid black;
+    border-radius: 11px;
+
+    &.opened {
+        width: 200px;
+
+        .nav__items_item {
+            span {
+                opacity: 1;
+                transition: .3s;
+            }
+        }
+
+        .nav__footer_item {
+            span {
+                opacity: 1;
+                transition: .3s;
+            }
+        }
+
+        .nav__toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            right: -10px;
+            background-color: rgb(68, 68, 68);
+            transform: rotateZ(180deg);
+            transition: transform .3s;
+        }
+    }
+
+    .nav {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        border: 2px solid #242424;
+        border-radius: 10px;
+        padding: 0 10px;
+        color: rgba(255, 255, 255, 0.7);
+
+        &__header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            font-size: 20px;
+            padding-top: 30px;
+            margin-bottom: 50px;
+
+            img {
+                width: 30px;
+                padding: 0 5px;
+                margin-right: 10px;
+            }
+
+            span {
+                color: white;
+            }
+        }
+
+        &__toggle {
+            position: absolute;
+            top: 36px;
+            right: -35px;
+            display: flex;
+            cursor: pointer;
+            border: none;
+            border-radius: 20px;
+            background-color: black;
+            padding: 5px;
+            transform: rotateZ(0deg);
+            transition: transform .3s;
+
+            :first-child {
+                width: 15px;
+                height: 15px;
+            }
+        }
+
+        &__items {
+            :last-child {
+                margin-bottom: 0;
+            }
+
+            &_item {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                margin-bottom: 15px;
+                padding: 8px 10px;
+                cursor: pointer;
+                border-radius: 10px;
+                transition: .3s;
+
+                span {
+                    opacity: 0;
+                    transition: .3s;
+                    transition-delay: .1s;
+                }
+
+                :first-child {
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 20px;
+                }
+
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.15);
+                }
+
+                &.active {
+                    background-color: rgba(33, 27, 137, 0.7);
+                }
+            }
+        }
+
+        &__footer {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            margin-bottom: 30px;
+
+            :last-child {
+                margin-bottom: 0;
+            }
+
+            &_item {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                margin-bottom: 15px;
+                padding: 8px 10px;
+                cursor: pointer;
+                border-radius: 10px;
+                transition: .3s;
+
+                span {
+                    opacity: 0;
+                    transition: .3s;
+                    transition-delay: .1s;
+                }
+
+                :first-child {
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 20px;
+                }
+
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.15);
+                }
+
+                &.active {
+                    background-color: rgba(33, 27, 137, 0.7);
+                }
+            }
+        }
+    }
+}
