@@ -12,6 +12,13 @@
     &.opened {
         width: 200px;
 
+        .nav__header {
+            span {
+                opacity: 1;
+                transition: .3s;
+            }
+        }
+
         .nav__items_item {
             span {
                 opacity: 1;
@@ -63,6 +70,9 @@
 
             span {
                 color: white;
+                opacity: 0;
+                transition: .3s;
+                transition-delay: .1s;
             }
         }
 
